@@ -34,6 +34,7 @@ flutter:
   assets:
       - assets/megan_sin_headshot.png
       - assets/megan_sin_resume.pdf
+      - assets/megan_sin_resume.png
       - assets/frog_sonny_angel.png
       - assets/poetry_pal/rating 1.png
       - assets/poetry_pal/rating 2.png

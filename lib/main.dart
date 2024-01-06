@@ -541,8 +541,6 @@ class ProjectsPage extends StatelessWidget {
 class ResumePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final pdfController = PdfController(document: PdfDocument.openAsset('assets/megan_sin_resume.pdf'),);
-    Widget pdfView() => PdfView(controller: pdfController,);
 
     return Center(
       child: Scaffold(
@@ -551,20 +549,18 @@ class ResumePage extends StatelessWidget {
             style: GoogleFonts.firaMono(color: Colors.black, fontWeight: FontWeight.bold),),
           ),
           // body: PdfView(controller: PdfController(document: PdfDocument.openAsset('assets/megan_sin_resume.pdf')),),
-        body: Center(
-          child: Image.asset('megan_sin_resume.png'),
-          )
-        
-        // SingleChildScrollView(
-        //   child: Image.asset(
-        //             'assets/megan_sin_resume.png',
-        //             fit: BoxFit.contain, 
-        //           ),
-        // ),
+        body:         
+        SingleChildScrollView(
+          child: Image.asset(
+                    'assets/megan_sin_resume.png',
+                    fit: BoxFit.contain, 
+                  ),
+        ),
       ),
     );
   }
 }
+
 
 class LaunchUrlButton extends StatelessWidget {
   final Uri url;
