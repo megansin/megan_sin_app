@@ -19,8 +19,10 @@ class Project {
   final String description;
   final String longdescription;
   final String skills;
+  final List<String> assetImagePaths;
+  final Uri? url;
 
-  Project({required this.title, required this.description, required this.longdescription, required this.skills});
+  Project({required this.title, required this.description, required this.longdescription, required this.skills, required this.assetImagePaths, this.url});
 }
 
 final List<Project> projects = [
@@ -28,55 +30,69 @@ final List<Project> projects = [
     title: 'Poetry Pal',
     description: 'Poetry recommendation tool',
     longdescription: 'Poetry Pal is a comprehensive and user-friendly poetry recommendation tool that aims to show users new pieces of poetry they might enjoy. Poetry Pal builds each user a unique personalized profile based on poetry users have previously reviewed, which it then uses to make poetry recommendations.',
-    skills: 'Python, Recommendation System, (Item-Item and Neural) Collaborative Filtering, NeuMF'
+    skills: 'Python, Recommendation System, (Item-Item and Neural) Collaborative Filtering, NeuMF',
+    assetImagePaths: ['/poetry_pal/rating 1.png', '/poetry_pal/rating 2.png', '/poetry_pal/rating 3.png'],
+    url: Uri.parse('https://megansin.github.io/poetry_pal/')
   ),
   Project(
     title: 'AI Resume Parser',
     description: 'Web application where users can upload their resume and paste a job description to see how well their resume fits the keywords found in the job description',
     longdescription: 'I worked on a team with two other group members and we developed web application to screen candidate resumes and automatically identify missing keywords. We extracted key information using named entity recognition and other NLP techniques in a Python backend.',
-    skills: 'Python, Flask, NLP, Artificial Intelligence'
+    skills: 'Python, Flask, NLP, Artificial Intelligence',
+    assetImagePaths: ['/ai_resume_parser/home.png'],
+    url: Uri.parse('https://github.com/megansin/CS4341_Resume_Parser')
   ),
   Project(
     title: 'SpotBot: Fake Yelp Review Analyzer',
     description: 'Tool that utilizes machine learning to attempt to classify Yelp reviews as either fraudulent or valid',
     longdescription: 'I worked on a team with three other teammates and we implemented an automated fake review detection tool with 87% model accuracy using Python and BERT NLP. We uncovered class imbalances and investigated data distributions via exploratory data analysis (EDA). We also prepared the review data for BERT classifier via PyTorch input pipeline with tokenization.',
-    skills: 'Python, BERT, NLP, PyTorch'
+    skills: 'Python, BERT, NLP, PyTorch',
+    assetImagePaths: ['/spotbot/process_flowchart.png', '/spotbot/results.png'],
+    url: Uri.parse('https://seamussullivan.github.io/CS539-SpotBot-Website/')
   ),
   Project(
     title: 'Elite Matchmaker: F1 Driver Sponsorship Tool',
     description: 'Ranked and scored F1 drivers based on factors in alignment with company’s interests',
     longdescription: 'Worked on a team to present to potential clients a service built using Python (pandas, tweepy, NumPy) to advise companies interested in sponsoring Formula 1 drivers. We ranked and scored 20 F1 drivers based on factors in alignment with company’s interests–calculated frequency analysis using Twitter data scraped to MongoDB Atlas database.',
-    skills: 'Python, Frequency Analysis, MongoDB, Web Scraping, Twitter API'
+    skills: 'Python, Frequency Analysis, MongoDB, Web Scraping, Twitter API',
+    assetImagePaths: ['/f1/example.png', '/f1/example2.png'],
+    url: Uri.parse('https://github.com/megansin/data-science-courses/tree/main/DS3010/case-study-4')
   ),
   Project(
     title: 'Visitor Management Strategies: Ho‘omaluhia Botanical Garden',
     description: 'Research and created long and short term visitor management strategy suggestions',
     longdescription: 'Over 14 weeks, I worked on a team of four students in reviewing visitor management (VM) plans from similar outdoor recreational sites, collected and analyzed Hoʻomaluhia visitor data to identify visitor trends, and gathered feedback from stakeholders to help develop controlled access management and VM strategies. Our final recommendations aimed to manage increased visitation to the garden and its impact on the local community.',
-    skills: 'Research, Data Visualization, Consultation, Communication, Presentation, Professional Writing'
+    skills: 'Research, Data Visualization, Consultation, Communication, Presentation, Professional Writing',
+    assetImagePaths: ['/iqp/figure3.png', '/iqp/barchart.png', '/iqp/short_term_suggestion.png'],
+    url: Uri.parse('https://digital.wpi.edu/concern/student_works/v979v636c?locale=en')
   ),
   Project(
     title: 'Data for Good Hackathon: Star House Expansion Plan',
     description: 'Recommended locations based on predicted need for nonprofit Star House’s services',
     longdescription: 'Over 24 hours, I worked on a team of seven people and crafted a custom composite score to determine locations’ need for nonprofit Star House’s services using significant variables, determined using 12 linear regression models (sklearn). We utilized seven sources of data over a 4-year period containing relevant attributes to clean and parse. Finally, we delivered recommendations our model generated to two panels of judges through a presentation',
-    skills: 'Python, Linear Regression, Research'
+    skills: 'Python, Linear Regression, Research',
+    assetImagePaths: ['/data4good/exec_summary.png', '/data4good/approach.png', '/data4good/recommendations.png']
   ),
-  Project(
-    title: 'WiDS Datathon: Diabetes Prediction',
-    description: 'Utilized machine learning to predict if patients have diabetes',
-    longdescription: 'Worked with teammates to use machine learning to predict if patients have diabetes using Multi-layer Perceptron classifier model (scikit-learn)–final model was 83.16% accurate',
-    skills: 'Python, Feature Analysis, Multi-Layer Perceptron Classifier, Google CoLab'
-  ),
+  // Project(
+  //   title: 'WiDS Datathon: Diabetes Prediction',
+  //   description: 'Utilized machine learning to predict if patients have diabetes',
+  //   longdescription: 'Worked with teammates to use machine learning to predict if patients have diabetes using Multi-layer Perceptron classifier model (scikit-learn)–final model was 83.16% accurate',
+  //   skills: 'Python, Feature Analysis, Multi-Layer Perceptron Classifier, Google CoLab',
+  //   assetImagePaths: ['', '']
+  // ),
   Project(
     title: 'Predictive Modeling for Stroke Diagnosis',
     description: 'Determined risk factors for stroke prediction',
     longdescription: 'I worked on a team to investigate statistical relationships using correlation matrix in R and determine risk factors for stroke prediction. We reduced bias and improved accuracy by employing SMOTE to address the 5% stroke rate imbalance in the dataset.',
-    skills: 'R, Data Analysis, Logistic Regression, KNN, SMOTE, Presentation'
+    skills: 'R, Data Analysis, Logistic Regression, KNN, SMOTE, Presentation',
+    assetImagePaths: ['/stroke/corr_matrix.png', '/stroke/approach1.png', '/stroke/approach2.png', '/stroke/results.png']
   ),
   Project(
     title: 'Closet Inventory Web Application',
     description: 'Web application to allow users to inventory and organize their closets virtually',
     longdescription:  'Developed a web application to allow users to inventory and organize garments, and also designed a SQL database accessed by the application to store user and clothing data.',
-    skills: 'Python, SQL, Flask, Javascript'
+    skills: 'Python, SQL, Flask, Javascript',
+    assetImagePaths: ['', '']
   ),
   // Add more projects
 ];
@@ -378,14 +394,38 @@ class ProjectDetailsPage extends StatelessWidget {
         child: Container(
           width: 600,
           padding: EdgeInsets.all(8),
-          child: Text(
-            project.longdescription,
-            textAlign: TextAlign.center,
-            style: GoogleFonts.firaMono(
-              fontSize: 14,
-              color: Colors.black,
-              fontWeight: FontWeight.normal,
-            ),
+          child: Column(
+            children: [
+              Text(
+                project.longdescription,
+                textAlign: TextAlign.center,
+                style: GoogleFonts.firaMono(
+                  fontSize: 14,
+                  color: Colors.black,
+                  fontWeight: FontWeight.normal,
+                ),
+              ),
+              SizedBox(height: 20),
+              Text(
+                'Skills: ',
+                textAlign: TextAlign.center,
+                style: GoogleFonts.firaMono(
+                  fontSize: 14,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+              Text(
+                project.skills,
+                textAlign: TextAlign.center,
+                style: GoogleFonts.firaMono(
+                  fontSize: 14,
+                  color: Colors.black,
+                  fontWeight: FontWeight.normal,
+                ),
+              ),
+
+            ],
           ),
         ),
       ),
