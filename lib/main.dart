@@ -38,7 +38,7 @@ final List<Project> projects = [
   Project(
     title: 'AI Resume Parser',
     description: 'Web application where users can upload their resume and paste a job description to see how well their resume fits the keywords found in the job description',
-    longdescription: 'I worked on a team with two other group members and we developed web application to screen candidate resumes and automatically identify missing keywords. We extracted key information using named entity recognition and other NLP techniques in a Python backend.',
+    longdescription: 'I worked on a team with two other group members and we developed a web application that screens candidate resumes and automatically identifies missing keywords. We extracted key information using named entity recognition and other NLP techniques in a Python backend.',
     skills: 'Python, Flask, NLP, Artificial Intelligence',
     assetImagePaths: ['assets/ai_resume_parser/home.png'],
     url: Uri.parse('https://github.com/megansin/CS4341_Resume_Parser')
