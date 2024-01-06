@@ -15,10 +15,14 @@ dependencies:
   animated_text_kit: ^4.2.2
   awesome: ^0.0.3
   google_fonts: ^6.1.0
-  photo_view: ^0.14.0
   url_launcher: ^6.0.0
   font_awesome_flutter: ^10.6.0
   flutter_image_slideshow: ^0.1.6
+  pdfx:
+    git:
+      url: 'https://github.com/ScerIO/packages.flutter'
+      ref: '4be9de9ffed5398fd7d5f44bbb07dcd3d3f1711b'
+      path: packages/pdfx
 
 dev_dependencies:
   flutter_test:

@@ -7,7 +7,8 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/gestures.dart';
 import 'package:url_launcher/url_launcher.dart';
-  import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
+import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
+import 'package:pdfx/pdfx.dart';
 
 
 void main() {
@@ -39,7 +40,7 @@ final List<Project> projects = [
     description: 'Web application where users can upload their resume and paste a job description to see how well their resume fits the keywords found in the job description',
     longdescription: 'I worked on a team with two other group members and we developed web application to screen candidate resumes and automatically identify missing keywords. We extracted key information using named entity recognition and other NLP techniques in a Python backend.',
     skills: 'Python, Flask, NLP, Artificial Intelligence',
-    assetImagePaths: ['/ai_resume_parser/home.png'],
+    assetImagePaths: ['assets/ai_resume_parser/home.png'],
     url: Uri.parse('https://github.com/megansin/CS4341_Resume_Parser')
   ),
   Project(
@@ -47,7 +48,7 @@ final List<Project> projects = [
     description: 'Tool that utilizes machine learning to attempt to classify Yelp reviews as either fraudulent or valid',
     longdescription: 'I worked on a team with three other teammates and we implemented an automated fake review detection tool with 87% model accuracy using Python and BERT NLP. We uncovered class imbalances and investigated data distributions via exploratory data analysis (EDA). We also prepared the review data for BERT classifier via PyTorch input pipeline with tokenization.',
     skills: 'Python, BERT, NLP, PyTorch',
-    assetImagePaths: ['/spotbot/process_flowchart.png', '/spotbot/results.png'],
+    assetImagePaths: ['assets/spotbot/process_flowchart.png', 'assets/spotbot/results.png'],
     url: Uri.parse('https://seamussullivan.github.io/CS539-SpotBot-Website/')
   ),
   Project(
@@ -55,7 +56,7 @@ final List<Project> projects = [
     description: 'Ranked and scored F1 drivers based on factors in alignment with company’s interests',
     longdescription: 'Worked on a team to present to potential clients a service built using Python (pandas, tweepy, NumPy) to advise companies interested in sponsoring Formula 1 drivers. We ranked and scored 20 F1 drivers based on factors in alignment with company’s interests–calculated frequency analysis using Twitter data scraped to MongoDB Atlas database.',
     skills: 'Python, Frequency Analysis, MongoDB, Web Scraping, Twitter API',
-    assetImagePaths: ['/f1/example.png', '/f1/example2.png'],
+    assetImagePaths: ['assets/f1/example.png', 'assets/f1/example2.png'],
     url: Uri.parse('https://github.com/megansin/data-science-courses/tree/main/DS3010/case-study-4')
   ),
   Project(
@@ -63,7 +64,7 @@ final List<Project> projects = [
     description: 'Research and created long and short term visitor management strategy suggestions',
     longdescription: 'Over 14 weeks, I worked on a team of four students in reviewing visitor management (VM) plans from similar outdoor recreational sites, collected and analyzed Hoʻomaluhia visitor data to identify visitor trends, and gathered feedback from stakeholders to help develop controlled access management and VM strategies. Our final recommendations aimed to manage increased visitation to the garden and its impact on the local community.',
     skills: 'Research, Data Visualization, Consultation, Communication, Presentation, Professional Writing',
-    assetImagePaths: ['/iqp/figure3.png', '/iqp/barchart.png', '/iqp/short_term_suggestion.png'],
+    assetImagePaths: ['assets/iqp/figure3.png', 'assets/iqp/barchart.png', 'assets/iqp/short_term_suggestion.png'],
     url: Uri.parse('https://digital.wpi.edu/concern/student_works/v979v636c?locale=en')
   ),
   Project(
@@ -71,21 +72,22 @@ final List<Project> projects = [
     description: 'Recommended locations based on predicted need for nonprofit Star House’s services',
     longdescription: 'Over 24 hours, I worked on a team of seven people and crafted a custom composite score to determine locations’ need for nonprofit Star House’s services using significant variables, determined using 12 linear regression models (sklearn). We utilized seven sources of data over a 4-year period containing relevant attributes to clean and parse. Finally, we delivered recommendations our model generated to two panels of judges through a presentation',
     skills: 'Python, Linear Regression, Research',
-    assetImagePaths: ['/data4good/exec_summary.png', '/data4good/approach.png', '/data4good/recommendations.png']
+    assetImagePaths: ['assets/data4good/exec_summary.png', 'assets/data4good/approach.png', 'assets/data4good/recommendations.png']
   ),
-  // Project(
-  //   title: 'WiDS Datathon: Diabetes Prediction',
-  //   description: 'Utilized machine learning to predict if patients have diabetes',
-  //   longdescription: 'Worked with teammates to use machine learning to predict if patients have diabetes using Multi-layer Perceptron classifier model (scikit-learn)–final model was 83.16% accurate',
-  //   skills: 'Python, Feature Analysis, Multi-Layer Perceptron Classifier, Google CoLab',
-  //   assetImagePaths: ['', '']
-  // ),
+  Project(
+    title: 'WiDS Datathon: Diabetes Prediction',
+    description: 'Utilized machine learning to predict if patients have diabetes',
+    longdescription: 'Worked with teammates to use machine learning to predict if patients have diabetes using Multi-layer Perceptron classifier model (scikit-learn)–final model was 83.16% accurate',
+    skills: 'Python, Feature Analysis, Multi-Layer Perceptron Classifier, Google CoLab',
+    assetImagePaths: [],
+    url: Uri.parse('https://github.com/megansin/wids_datathon_2021')
+  ),
   Project(
     title: 'Predictive Modeling for Stroke Diagnosis',
     description: 'Determined risk factors for stroke prediction',
     longdescription: 'I worked on a team to investigate statistical relationships using correlation matrix in R and determine risk factors for stroke prediction. We reduced bias and improved accuracy by employing SMOTE to address the 5% stroke rate imbalance in the dataset.',
     skills: 'R, Data Analysis, Logistic Regression, KNN, SMOTE, Presentation',
-    assetImagePaths: ['/stroke/corr_matrix.png', '/stroke/approach1.png', '/stroke/approach2.png', '/stroke/results.png']
+    assetImagePaths: ['assets/stroke/corr_matrix.png', 'assets/stroke/approach1.png', 'assets/stroke/approach2.png', 'assets/stroke/results.png']
   ),
   // Project(
   //   title: 'Closet Inventory Web Application',
@@ -250,7 +252,7 @@ class GeneratorPage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('Megan Sin',
+          SelectableText('Megan Sin',
           style: GoogleFonts.firaMono(fontSize: 48, fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 30),
@@ -271,7 +273,7 @@ class GeneratorPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               ClipOval(
-                child: Image.asset('megan_sin_headshot.png',
+                child: Image.asset('assets/megan_sin_headshot.png',
                 width: 250,
                 height: 250,
                 fit: BoxFit.cover),
@@ -279,13 +281,12 @@ class GeneratorPage extends StatelessWidget {
               SizedBox(width: 50),
               Column(
                 children: [
-                  
                   Container(
                     width: 600,
                     padding: EdgeInsets.all(8),
-                    child: RichText(
-                      textAlign: TextAlign.left,
-                      text: TextSpan(
+                    child: SelectionArea(
+                      child: SelectableText.rich(
+                      TextSpan(
                         style: GoogleFonts.firaCode(fontSize: 16, color: Colors.black),
                         children: <TextSpan>[
                           TextSpan(
@@ -311,14 +312,15 @@ class GeneratorPage extends StatelessWidget {
                         ],
                       ),
                     ),
+                    )
+                    
                   ),
 
                   Container(
                     width: 600,
                     padding: EdgeInsets.all(8),
-                    child: RichText(
-                      textAlign: TextAlign.left,
-                      text: TextSpan(
+                    child: SelectableText.rich(
+                      TextSpan(
                         style: GoogleFonts.firaCode(fontSize: 16, color: Colors.black),
                         children: <TextSpan>[
                           TextSpan(
@@ -331,9 +333,8 @@ class GeneratorPage extends StatelessWidget {
                   Container(
                     width: 600,
                     padding: EdgeInsets.all(8),
-                    child: RichText(
-                      textAlign: TextAlign.left,
-                      text: TextSpan(
+                    child: SelectableText.rich(
+                      TextSpan(
                         style: GoogleFonts.firaCode(fontSize: 16, color: Colors.black),
                         children: <TextSpan>[
                           TextSpan(
@@ -391,10 +392,7 @@ class URLText extends StatelessWidget {
       onTap: _launchURL,
       child: Text(
         text,
-        style: TextStyle(
-          color: Colors.blue,
-          decoration: TextDecoration.underline,
-        ),
+        style: GoogleFonts.firaMono(color: Colors.blue,  decoration: TextDecoration.underline) 
       ),
     );
   }
@@ -409,7 +407,7 @@ class ProjectDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: SelectableText(
           project.title,
           textAlign: TextAlign.center,
           style: GoogleFonts.firaMono(
@@ -430,6 +428,7 @@ class ProjectDetailsPage extends StatelessWidget {
                   text: 'Visit project website',
                   url: project.url!,
                 ),
+                SizedBox(height: 10),
               ImageSlideshow(
                 width: double.infinity,
                 height: 400,
@@ -447,7 +446,7 @@ class ProjectDetailsPage extends StatelessWidget {
                 ]
               ),
               SizedBox(height: 30),
-              Text(
+              SelectableText(
                 project.longdescription,
                 textAlign: TextAlign.center,
                 style: GoogleFonts.firaMono(
@@ -457,25 +456,23 @@ class ProjectDetailsPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 20),
-              Text(
-                'Skills: ',
-                textAlign: TextAlign.center,
-                style: GoogleFonts.firaMono(
-                  fontSize: 14,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w800,
+              Center(
+                child: SelectableText.rich(
+                  TextSpan(
+                          style: GoogleFonts.firaMono(fontSize: 16, color: Colors.black),
+                          children: <TextSpan>[
+                            TextSpan(
+                              text: 'Skills: ',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            TextSpan(
+                              text: project.skills,
+                            ),
+                          ]
+                        ),
+                    textAlign: TextAlign.center,
                 ),
               ),
-              Text(
-                project.skills,
-                textAlign: TextAlign.center,
-                style: GoogleFonts.firaMono(
-                  fontSize: 14,
-                  color: Colors.black,
-                  fontWeight: FontWeight.normal,
-                ),
-              ),
-
             ],
           ),
         ),
@@ -496,7 +493,7 @@ class ProjectsPage extends StatelessWidget {
       ),
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Projects',
+          title: SelectableText('Projects',
           style: GoogleFonts.firaMono(color: Colors.black, fontWeight: FontWeight.bold),),
         ),
         body: GridView.extent(
@@ -544,25 +541,26 @@ class ProjectsPage extends StatelessWidget {
 class ResumePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-          title: Text('Resume',
-          style: GoogleFonts.firaMono(color: Colors.black, fontWeight: FontWeight.bold),),
-        ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            children: <Widget>[
-              Transform.scale(
-                scale: 1,
-                child: Image.asset(
-                  'megan_sin_resume.png',
-                  fit: BoxFit.contain, 
-                ),
-              ),
-            ],
+    final pdfController = PdfController(document: PdfDocument.openAsset('assets/megan_sin_resume.pdf'),);
+    Widget pdfView() => PdfView(controller: pdfController,);
+
+    return Center(
+      child: Scaffold(
+        appBar: AppBar(
+            title: SelectableText('Resume',
+            style: GoogleFonts.firaMono(color: Colors.black, fontWeight: FontWeight.bold),),
           ),
-        ),
+          // body: PdfView(controller: PdfController(document: PdfDocument.openAsset('assets/megan_sin_resume.pdf')),),
+        body: Center(
+          child: Image.asset('megan_sin_resume.png'),
+          )
+        
+        // SingleChildScrollView(
+        //   child: Image.asset(
+        //             'assets/megan_sin_resume.png',
+        //             fit: BoxFit.contain, 
+        //           ),
+        // ),
       ),
     );
   }
@@ -595,7 +593,7 @@ class LaunchUrlButton extends StatelessWidget {
         children: [
           icon, 
           SizedBox(width: 10),
-          Text(buttontext, 
+          SelectableText(buttontext, 
           style: GoogleFonts.firaCode(fontSize: 18, fontWeight: FontWeight.w600),),
         ],
       ),
@@ -616,7 +614,7 @@ class ContactMePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: SelectableText(
           'Contact Me',
           style: GoogleFonts.firaMono(color: Colors.black, fontWeight: FontWeight.bold),
         ),
@@ -625,10 +623,10 @@ class ContactMePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Text('Get in touch',
+            SelectableText('Get in touch',
             style: GoogleFonts.playfairDisplay(fontSize: 50, fontWeight: FontWeight.w700),),
             // SizedBox(height: 30),
-            Text('Please feel free to email me or send me a message on LinkedIn. I look forward to hearing from you!',
+            SelectableText('Please feel free to email me or send me a message on LinkedIn. I look forward to hearing from you!',
             style: GoogleFonts.firaMono(fontSize: 18, fontWeight: FontWeight.w500),),
             // SizedBox(height: 30),
             Row(
@@ -676,11 +674,11 @@ class SecretLinkPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Secret Page :)',
+        title: SelectableText('Secret Page :)',
         style: GoogleFonts.firaMono(),),
       ),
       body: Center(
-        child: Image.asset('frog_sonny_angel.png'),
+        child: Image.asset('assets/frog_sonny_angel.png'),
       ),
     );
   }
