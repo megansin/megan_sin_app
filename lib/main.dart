@@ -1,9 +1,14 @@
+import 'dart:html';
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/gestures.dart';
+import 'package:url_launcher/url_launcher.dart';
+  import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -12,34 +17,66 @@ void main() {
 class Project {
   final String title;
   final String description;
+  final String longdescription;
+  final String skills;
 
-  Project({required this.title, required this.description});
+  Project({required this.title, required this.description, required this.longdescription, required this.skills});
 }
 
 final List<Project> projects = [
   Project(
+    title: 'Poetry Pal',
+    description: 'Poetry recommendation tool',
+    longdescription: 'Poetry Pal is a comprehensive and user-friendly poetry recommendation tool that aims to show users new pieces of poetry they might enjoy. Poetry Pal builds each user a unique personalized profile based on poetry users have previously reviewed, which it then uses to make poetry recommendations.',
+    skills: 'Python, Recommendation System, (Item-Item and Neural) Collaborative Filtering, NeuMF'
+  ),
+  Project(
     title: 'AI Resume Parser',
     description: 'Web application where users can upload their resume and paste a job description to see how well their resume fits the keywords found in the job description',
+    longdescription: 'I worked on a team with two other group members and we developed web application to screen candidate resumes and automatically identify missing keywords. We extracted key information using named entity recognition and other NLP techniques in a Python backend.',
+    skills: 'Python, Flask, NLP, Artificial Intelligence'
   ),
   Project(
     title: 'SpotBot: Fake Yelp Review Analyzer',
     description: 'Tool that utilizes machine learning to attempt to classify Yelp reviews as either fraudulent or valid',
+    longdescription: 'I worked on a team with three other teammates and we implemented an automated fake review detection tool with 87% model accuracy using Python and BERT NLP. We uncovered class imbalances and investigated data distributions via exploratory data analysis (EDA). We also prepared the review data for BERT classifier via PyTorch input pipeline with tokenization.',
+    skills: 'Python, BERT, NLP, PyTorch'
   ),
   Project(
     title: 'Elite Matchmaker: F1 Driver Sponsorship Tool',
     description: 'Ranked and scored F1 drivers based on factors in alignment with company’s interests',
+    longdescription: 'Worked on a team to present to potential clients a service built using Python (pandas, tweepy, NumPy) to advise companies interested in sponsoring Formula 1 drivers. We ranked and scored 20 F1 drivers based on factors in alignment with company’s interests–calculated frequency analysis using Twitter data scraped to MongoDB Atlas database.',
+    skills: 'Python, Frequency Analysis, MongoDB, Web Scraping, Twitter API'
+  ),
+  Project(
+    title: 'Visitor Management Strategies: Ho‘omaluhia Botanical Garden',
+    description: 'Research and created long and short term visitor management strategy suggestions',
+    longdescription: 'Over 14 weeks, I worked on a team of four students in reviewing visitor management (VM) plans from similar outdoor recreational sites, collected and analyzed Hoʻomaluhia visitor data to identify visitor trends, and gathered feedback from stakeholders to help develop controlled access management and VM strategies. Our final recommendations aimed to manage increased visitation to the garden and its impact on the local community.',
+    skills: 'Research, Data Visualization, Consultation, Communication, Presentation, Professional Writing'
   ),
   Project(
     title: 'Data for Good Hackathon: Star House Expansion Plan',
     description: 'Recommended locations based on predicted need for nonprofit Star House’s services',
+    longdescription: 'Over 24 hours, I worked on a team of seven people and crafted a custom composite score to determine locations’ need for nonprofit Star House’s services using significant variables, determined using 12 linear regression models (sklearn). We utilized seven sources of data over a 4-year period containing relevant attributes to clean and parse. Finally, we delivered recommendations our model generated to two panels of judges through a presentation',
+    skills: 'Python, Linear Regression, Research'
   ),
   Project(
     title: 'WiDS Datathon: Diabetes Prediction',
     description: 'Utilized machine learning to predict if patients have diabetes',
+    longdescription: 'Worked with teammates to use machine learning to predict if patients have diabetes using Multi-layer Perceptron classifier model (scikit-learn)–final model was 83.16% accurate',
+    skills: 'Python, Feature Analysis, Multi-Layer Perceptron Classifier, Google CoLab'
   ),
   Project(
     title: 'Predictive Modeling for Stroke Diagnosis',
     description: 'Determined risk factors for stroke prediction',
+    longdescription: 'I worked on a team to investigate statistical relationships using correlation matrix in R and determine risk factors for stroke prediction. We reduced bias and improved accuracy by employing SMOTE to address the 5% stroke rate imbalance in the dataset.',
+    skills: 'R, Data Analysis, Logistic Regression, KNN, SMOTE, Presentation'
+  ),
+  Project(
+    title: 'Closet Inventory Web Application',
+    description: 'Web application to allow users to inventory and organize their closets virtually',
+    longdescription:  'Developed a web application to allow users to inventory and organize garments, and also designed a SQL database accessed by the application to store user and clothing data.',
+    skills: 'Python, SQL, Flask, Javascript'
   ),
   // Add more projects
 ];
@@ -102,7 +139,10 @@ class _MyHomePageState extends State<MyHomePage> {
         page = ProjectsPage();
         break;
       case 2:
-        page = Placeholder();
+        page = ResumePage();
+        break;
+      case 3:
+        page = ContactMePage();
         break;
       default:
         throw UnimplementedError('no widget for $selectedIndex');
@@ -121,8 +161,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       icon: Icon(Icons.home),
                       label: Text('Home',
                       style: GoogleFonts.firaMono(
-                        fontSize: 16, // Set the desired font size
-                        fontWeight: FontWeight.w500, // You can set fontWeight if needed
+                        fontSize: 16, 
+                        fontWeight: FontWeight.w500, 
                         ),
                       ),
                     ),
@@ -130,8 +170,17 @@ class _MyHomePageState extends State<MyHomePage> {
                       icon: Icon(Icons.folder),
                       label: Text('Projects',
                       style: GoogleFonts.firaMono(
-                        fontSize: 16, // Set the desired font size
-                        fontWeight: FontWeight.w500, // You can set fontWeight if needed
+                        fontSize: 16, 
+                        fontWeight: FontWeight.w500, 
+                        ),
+                      ),
+                    ),
+                    NavigationRailDestination(
+                      icon: Icon(Icons.description),
+                      label: Text('Resume',
+                      style: GoogleFonts.firaMono(
+                        fontSize: 16, 
+                        fontWeight: FontWeight.w500, 
                         ),
                       ),
                     ),
@@ -139,8 +188,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       icon: Icon(Icons.contact_page),
                       label: Text('Contact Me',
                       style: GoogleFonts.firaMono(
-                        fontSize: 16, // Set the desired font size
-                        fontWeight: FontWeight.w500, // You can set fontWeight if needed
+                        fontSize: 16, 
+                        fontWeight: FontWeight.w500, 
                         ),
                       ),
                     ),
@@ -221,7 +270,7 @@ class GeneratorPage extends StatelessWidget {
                     child: RichText(
                       textAlign: TextAlign.left,
                       text: TextSpan(
-                        style: GoogleFonts.firaMono(fontSize: 16, color: Colors.black),
+                        style: GoogleFonts.firaCode(fontSize: 16, color: Colors.black),
                         children: <TextSpan>[
                           TextSpan(
                             text: 'My name is Megan Sin and I am a senior at Worcester Polytechnic Institute (WPI) studying data science. I was previously a Summer Analyst intern in the AI & Data Science Analyst Program at ',
@@ -254,7 +303,7 @@ class GeneratorPage extends StatelessWidget {
                     child: RichText(
                       textAlign: TextAlign.left,
                       text: TextSpan(
-                        style: GoogleFonts.firaMono(fontSize: 16, color: Colors.black),
+                        style: GoogleFonts.firaCode(fontSize: 16, color: Colors.black),
                         children: <TextSpan>[
                           TextSpan(
                             text: 'I built my skills as a data scientist through various course projects, personal projects, and challenges at datathons. I love data analysis and being able to help people make data-driven decisions to make the world a better place.')
@@ -269,7 +318,7 @@ class GeneratorPage extends StatelessWidget {
                     child: RichText(
                       textAlign: TextAlign.left,
                       text: TextSpan(
-                        style: GoogleFonts.firaMono(fontSize: 16, color: Colors.black),
+                        style: GoogleFonts.firaCode(fontSize: 16, color: Colors.black),
                         children: <TextSpan>[
                           TextSpan(
                             text:
@@ -315,14 +364,35 @@ class ProjectDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(project.title),
+        title: Text(
+          project.title,
+          textAlign: TextAlign.center,
+          style: GoogleFonts.firaMono(
+            fontSize: 16,
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
       body: Center(
-        child: Text(project.description),
+        child: Container(
+          width: 600,
+          padding: EdgeInsets.all(8),
+          child: Text(
+            project.longdescription,
+            textAlign: TextAlign.center,
+            style: GoogleFonts.firaMono(
+              fontSize: 14,
+              color: Colors.black,
+              fontWeight: FontWeight.normal,
+            ),
+          ),
+        ),
       ),
     );
   }
 }
+
 
 class ProjectsPage extends StatelessWidget {
   @override
@@ -335,7 +405,7 @@ class ProjectsPage extends StatelessWidget {
       ),
       child: Scaffold(
         appBar: AppBar(
-          title: Text('My Projects',
+          title: Text('Projects',
           style: GoogleFonts.firaMono(color: Colors.black, fontWeight: FontWeight.bold),),
         ),
         body: GridView.extent(
@@ -380,13 +450,143 @@ class ProjectsPage extends StatelessWidget {
   }
 }
 
+class ResumePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+          title: Text('Resume',
+          style: GoogleFonts.firaMono(color: Colors.black, fontWeight: FontWeight.bold),),
+        ),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              Transform.scale(
+                scale: 1,
+                child: Image.asset(
+                  'megan_sin_resume.png',
+                  fit: BoxFit.contain, 
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class LaunchUrlButton extends StatelessWidget {
+  final Uri url;
+  final String buttontext;
+  final Icon icon;
+
+  LaunchUrlButton({required this.url, required this.buttontext, required this.icon});
+
+  Future<void> _launchURL() async {
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+ @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: _launchURL,
+      style: ElevatedButton.styleFrom(
+        padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0), 
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          icon, 
+          SizedBox(width: 10),
+          Text(buttontext, 
+          style: GoogleFonts.firaCode(fontSize: 18, fontWeight: FontWeight.w600),),
+        ],
+      ),
+    );
+  }
+}
+
+class ContactMePage extends StatelessWidget {
+  Future<void> _launchURL(Uri url) async {
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Contact Me',
+          style: GoogleFonts.firaMono(color: Colors.black, fontWeight: FontWeight.bold),
+        ),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Text('Get in touch',
+            style: GoogleFonts.playfairDisplay(fontSize: 50, fontWeight: FontWeight.w700),),
+            // SizedBox(height: 30),
+            Text('Please feel free to email me or send me a message on LinkedIn. I look forward to hearing from you!',
+            style: GoogleFonts.firaMono(fontSize: 18, fontWeight: FontWeight.w500),),
+            // SizedBox(height: 30),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+              Expanded(child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: LaunchUrlButton(
+                    buttontext: 'Email',
+                    url: Uri.parse('mailto:mpsin@wpi.edu?subject=Website Contact Me Page'),
+                    icon: Icon(Icons.email), 
+                  ),
+                )
+              ),
+              Expanded(child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: LaunchUrlButton(
+                    buttontext: 'LinkedIn',
+                    url: Uri.parse('https://www.linkedin.com/in/megan-sin/'),
+                    icon: Icon(FontAwesomeIcons.linkedin), 
+                  ),
+                )
+              ),
+              Expanded(child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: LaunchUrlButton(
+                    buttontext: 'GitHub',
+                    url: Uri.parse('https://github.com/megansin'), 
+                    icon: Icon(FontAwesomeIcons.github)
+                  )
+                )
+              ),
+              ],
+            ),
+          ],
+        ),
+        
+      ),
+    );
+  }
+}
 
 class SecretLinkPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Secret Page'),
+        title: Text('Secret Page :)',
+        style: GoogleFonts.firaMono(),),
       ),
       body: Center(
         child: Image.asset('frog_sonny_angel.png'),

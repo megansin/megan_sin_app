@@ -17,6 +17,10 @@ dependencies:
   animated_text_kit: ^4.2.2
   awesome: ^0.0.3
   google_fonts: ^6.1.0
+  photo_view: ^0.14.0
+  url_launcher: ^6.0.0
+  font_awesome_flutter: ^10.6.0
+  flutter_image_slideshow: ^0.1.6
 
 dev_dependencies:
   flutter_test:
@@ -27,4 +31,5 @@ dev_dependencies:
 flutter:
   assets:
       - assets/megan_sin_headshot.png
+      - assets/megan_sin_resume.pdf
   uses-material-design: true
