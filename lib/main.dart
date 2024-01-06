@@ -31,7 +31,7 @@ final List<Project> projects = [
     description: 'Poetry recommendation tool',
     longdescription: 'Poetry Pal is a comprehensive and user-friendly poetry recommendation tool that aims to show users new pieces of poetry they might enjoy. Poetry Pal builds each user a unique personalized profile based on poetry users have previously reviewed, which it then uses to make poetry recommendations.',
     skills: 'Python, Recommendation System, (Item-Item and Neural) Collaborative Filtering, NeuMF',
-    assetImagePaths: ['/poetry_pal/rating 1.png', '/poetry_pal/rating 2.png', '/poetry_pal/rating 3.png'],
+    assetImagePaths: ['assets/poetry_pal/rating 1.png', 'assets/poetry_pal/rating 2.png', 'assets/poetry_pal/rating 3.png'],
     url: Uri.parse('https://megansin.github.io/poetry_pal/')
   ),
   Project(
@@ -87,13 +87,13 @@ final List<Project> projects = [
     skills: 'R, Data Analysis, Logistic Regression, KNN, SMOTE, Presentation',
     assetImagePaths: ['/stroke/corr_matrix.png', '/stroke/approach1.png', '/stroke/approach2.png', '/stroke/results.png']
   ),
-  Project(
-    title: 'Closet Inventory Web Application',
-    description: 'Web application to allow users to inventory and organize their closets virtually',
-    longdescription:  'Developed a web application to allow users to inventory and organize garments, and also designed a SQL database accessed by the application to store user and clothing data.',
-    skills: 'Python, SQL, Flask, Javascript',
-    assetImagePaths: ['', '']
-  ),
+  // Project(
+  //   title: 'Closet Inventory Web Application',
+  //   description: 'Web application to allow users to inventory and organize their closets virtually',
+  //   longdescription:  'Developed a web application to allow users to inventory and organize garments, and also designed a SQL database accessed by the application to store user and clothing data.',
+  //   skills: 'Python, SQL, Flask, Javascript',
+  //   assetImagePaths: ['', '']
+  // ),
   // Add more projects
 ];
 
@@ -371,6 +371,35 @@ class GeneratorPage extends StatelessWidget {
   }
 }
 
+class URLText extends StatelessWidget {
+  final String text;
+  final Uri url;
+
+  URLText({required this.text, required this.url});
+
+  Future<void> _launchURL() async {
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: _launchURL,
+      child: Text(
+        text,
+        style: TextStyle(
+          color: Colors.blue,
+          decoration: TextDecoration.underline,
+        ),
+      ),
+    );
+  }
+}
+
 class ProjectDetailsPage extends StatelessWidget {
   final Project project;
 
@@ -396,6 +425,28 @@ class ProjectDetailsPage extends StatelessWidget {
           padding: EdgeInsets.all(8),
           child: Column(
             children: [
+              if (project.url != null)
+                URLText( 
+                  text: 'Visit project website',
+                  url: project.url!,
+                ),
+              ImageSlideshow(
+                width: double.infinity,
+                height: 400,
+                initialPage: 0,
+                indicatorColor: Colors.blue,
+                indicatorBackgroundColor: Colors.grey,
+                autoPlayInterval: 0,
+                isLoop: true,
+                children: [
+                  for (var imagePath in project.assetImagePaths)
+                  Image.asset(
+                    imagePath,
+                    fit: BoxFit.scaleDown,
+                  ),
+                ]
+              ),
+              SizedBox(height: 30),
               Text(
                 project.longdescription,
                 textAlign: TextAlign.center,
